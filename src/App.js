@@ -40,6 +40,12 @@ function App() {
         </li>
       </ul>
 
+      <u1 className="Welcome">
+        <li>
+        <h1 style={{color:"white"}}>Welcome, Name! Where do you want to eat?</h1>
+        </li>
+      </u1>
+     
       <ul className="Content">
         <li>
           <ul className="Locations">
@@ -64,28 +70,7 @@ function App() {
           </ul>
         </li>
         <li>
-          <ul className="Hots">
-            <li>
-              <h1 style={{color:"white"}}>Suggestions</h1>
-            </li>
-            <li>
-              <Button variant="light" size="lg">
-                <h2>DON'T FORGET TO LEAVE A REVIEW</h2>
-              </Button>{' '}
-            </li>
-            <li>
-              <Button variant="dark" size="lg">
-                <h6>Goat's Head</h6>
-                <h2>Cheese Borgor</h2>
-              </Button>{' '}
-            </li>
-            <li>
-              <Button variant="dark" size="lg">
-                <h6>Morgan</h6>
-                <h2>Pizza</h2>
-              </Button>{' '}
-            </li>
-          </ul>
+          
         </li>
       </ul>
 

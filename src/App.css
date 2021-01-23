@@ -5,7 +5,15 @@
   list-style-type: none;
   padding: 20px;
 }
-
+.Welcome{
+  display: flex;
+  list-style-type: none;
+  align-items: center;
+  justify-content: space-between;
+  align-self: center;
+  padding: 20px;
+  
+}
 .Content{
   display: flex;
   align-items: baseline;
@@ -30,3 +38,5 @@
 .Hots > li{
   margin: 10px 0px;
 }
+
+
