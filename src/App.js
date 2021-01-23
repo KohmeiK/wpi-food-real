@@ -3,14 +3,28 @@ import './App.css';
 import React from "react";
 import firebase from "firebase";
 import Badge from 'react-bootstrap/Badge'
+import 'firebase/firestore';
 
 function App() {
   const firebaseApp = firebase.apps[0];
-  //
-  // var db = firebase.firestore();
-  //
+
+    var db = firebase.firestore();
+
   function function123(){
     console.log("Hello World!")
+  }
+
+  function getLocations(time) {
+      console.log("ddddd")
+        db.collection("locations").where("time", "==", time)
+            .get()
+            .then(function(querySnapshot) {
+                querySnapshot.forEach(function(doc) {
+                console.log(doc.id, " => ", doc.data() )
+            })
+        }).catch(function(error) {
+          console.log("Error getting locations:", error);
+      })
   }
 
   return (
@@ -23,10 +37,8 @@ function App() {
         <Badge variant="warning">Warning</Badge> <Badge variant="info">Info</Badge>{' '}
         <Badge variant="light">Light</Badge> <Badge variant="dark">Dark</Badge>
       </div>
-      <h1>AAAA to give you some basic html looking code</h1>
-      also note css styling is applied
-      <h5>Occasionally auto-refresh breaks! Just force refresh with Control+Shift+R</h5>
-      <button onClick={function123}>
+      <h1>Graphic design is my passion</h1>
+      <button onClick={() => getLocations(1)}>
         Here is my button
       </button>
       <div className="RedBox">
