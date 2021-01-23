@@ -5,6 +5,8 @@ import React from "react";
 import firebase from "firebase";
 import Image from 'react-bootstrap/Image'
 import Button from 'react-bootstrap/Button'
+import Dropdown from 'react-bootstrap/Dropdown'
+import Form from 'react-bootstrap/Form'
 
 function App() {
   const firebaseApp = firebase.apps[0];
@@ -26,26 +28,28 @@ function App() {
       <ul className="TopBar">
         <li><Image src={logo} roundedCircle /></li>
         <li>
-          <ul className="LoginBox">        
-            <li>
-              <Button variant="light">
-                Login
-              </Button>
-            </li>
-            <li>
-              <Button variant="dark">
-                Sign Up
-              </Button>{' '}
-            </li>
-          </ul>
+          <Dropdown>
+            <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+              Name
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              <Dropdown.Item href="#/action-1">Redeem Points</Dropdown.Item>
+              <Dropdown.Item href="#/action-2">Log Out</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         </li>
       </ul>
+
+      <Form>
+            <Form.Control placeholder="First name" />
+      </Form>
 
       <ul className="Content">
         <li>
           <ul className="Locations">
             <li>
-              <h1 style={{color:"white"}}>Today's Ratings</h1>
+              <h1 style={{color:"white"}}>Locations</h1>
             </li>
             <li>
               <Button variant="dark" size="lg">
@@ -67,7 +71,12 @@ function App() {
         <li>
           <ul className="Hots">
             <li>
-              <h1 style={{color:"white"}}>Hot Items</h1>
+              <h1 style={{color:"white"}}>Suggestions</h1>
+            </li>
+            <li>
+              <Button variant="light" size="lg">
+                <h2>DON'T FORGET TO LEAVE A REVIEW</h2>
+              </Button>{' '}
             </li>
             <li>
               <Button variant="dark" size="lg">
@@ -79,11 +88,6 @@ function App() {
               <Button variant="dark" size="lg">
                 <h6>Morgan</h6>
                 <h2>Pizza</h2>
-              </Button>{' '}
-            </li>
-            <li>
-              <Button variant="light" size="lg">
-                <h2>GET FREE SHIT</h2>
               </Button>{' '}
             </li>
           </ul>
