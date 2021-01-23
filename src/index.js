@@ -3,6 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import firebase from "firebase/app";
+
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+firebase.initializeApp({
+  apiKey: "AIzaSyDGbeYDIpg9E90A5JeR2YlRdfCJAV2feQw",
+  authDomain: "wpi-chartwells-review.firebaseapp.com",
+  projectId: "wpi-chartwells-review",
+  storageBucket: "wpi-chartwells-review.appspot.com",
+  messagingSenderId: "16789420987",
+  appId: "1:16789420987:web:001148485b2beac9f2a29e",
+  measurementId: "G-4X09ECGM4Y"
+});
 
 ReactDOM.render(
   <React.StrictMode>
