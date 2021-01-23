@@ -6,6 +6,8 @@ import firebase from "firebase";
 import Image from 'react-bootstrap/Image'
 import Button from 'react-bootstrap/Button'
 
+import ReactStars from "react-rating-stars-component";
+
 function App() {
   const firebaseApp = firebase.apps[0];
   //
@@ -15,6 +17,18 @@ function App() {
   function function123(){
     console.log("Hello World!")
   }
+
+  const thirdExample = {
+    size: 40,
+    count: 5,
+    isHalf: false,
+    value: 4,
+    color: "black",
+    activeColor: "red",
+    onChange: newValue => {
+      console.log(`Example 3: new value is ${newValue}`);
+    }
+  };
 
   return (
     <div className="App" style={{ 
@@ -45,47 +59,24 @@ function App() {
         <li>
           <ul className="Locations">
             <li>
-              <h1 style={{color:"white"}}>Today's Ratings</h1>
-            </li>
-            <li>
-              <Button variant="dark" size="lg">
-                <h2>Goats Head</h2>
+              <h1 style={{color:"white"}}>FOOD 1: BORGAR???</h1>
+              <h1 style={{color:"white"}}>???/5 (average rating)</h1>
+              <ReactStars {...thirdExample} />
+              <li>
+              <Button variant="dark">
+                Submit
               </Button>{' '}
+              </li>
             </li>
-            <li>
-              <Button variant="dark" size="lg">
-                <h2>Morgan</h2>
-              </Button>{' '}
-            </li>
-            <li>
-              <Button variant="dark" size="lg">
-                <h2>Foise</h2>
-              </Button>{' '}
-            </li>
+            
           </ul>
         </li>
         <li>
           <ul className="Hots">
+            
             <li>
-              <h1 style={{color:"white"}}>Hot Items</h1>
             </li>
-            <li>
-              <Button variant="dark" size="lg">
-                <h6>Goat's Head</h6>
-                <h2>Cheese Borgor</h2>
-              </Button>{' '}
-            </li>
-            <li>
-              <Button variant="dark" size="lg">
-                <h6>Morgan</h6>
-                <h2>Pizza</h2>
-              </Button>{' '}
-            </li>
-            <li>
-              <Button variant="light" size="lg">
-                <h2>GET FREE SHIT</h2>
-              </Button>{' '}
-            </li>
+            
           </ul>
         </li>
       </ul>

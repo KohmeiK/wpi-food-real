@@ -28,10 +28,10 @@
 
 .Locations{
   list-style-type: none;
-  padding: 20px;
+  padding: 40px;
 }
 .Locations > li{
-  margin: 10px 0px;
+  margin: 20px 0px;
 }
 
 .Hots{
