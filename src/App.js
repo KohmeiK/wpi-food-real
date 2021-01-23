@@ -1,4 +1,5 @@
 import logo from "./Images/WPI_logo_name_small.png";
+import background from "./Images/FreshmanSkyscraper.png"
 import './App.css';
 import React from "react";
 import firebase from "firebase";
@@ -16,13 +17,18 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div className="App" style={{ 
+      backgroundImage: "url(" + background + ")",
+      backgroundPosition: 'center',
+      backgroundSize: 'cover',
+      backgroundRepeat: 'no-repeat'
+    }}>
       <ul className="TopBar">
         <li><Image src={logo} roundedCircle /></li>
         <li>
           <ul className="LoginBox">        
             <li>
-              <Button variant="outline-dark">
+              <Button variant="light">
                 Login
               </Button>
             </li>
@@ -39,7 +45,7 @@ function App() {
         <li>
           <ul className="Locations">
             <li>
-              <h1>Today's Ratings</h1>
+              <h1 style={{color:"white"}}>Today's Ratings</h1>
             </li>
             <li>
               <Button variant="dark" size="lg">
@@ -61,7 +67,7 @@ function App() {
         <li>
           <ul className="Hots">
             <li>
-              <h1>Hot Items</h1>
+              <h1 style={{color:"white"}}>Hot Items</h1>
             </li>
             <li>
               <Button variant="dark" size="lg">
@@ -76,36 +82,13 @@ function App() {
               </Button>{' '}
             </li>
             <li>
-              <Button variant="outline-secondary" size="lg">
+              <Button variant="light" size="lg">
                 <h2>GET FREE SHIT</h2>
               </Button>{' '}
             </li>
           </ul>
         </li>
       </ul>
-
-      <h1>AAAA to give you some basic html looking code</h1>
-      also note css styling is applied
-      <h5>Occasionally auto-refresh breaks! Just force refresh with Control+Shift+R</h5>
-      
-      <button onClick={function123}>
-        Here is my button
-      </button>
-
-      <div className="RedBox">
-        <ul>
-          <li> Item 1</li>
-          <li> Item 2</li>
-          <li> Item 4</li>
-        </ul>
-      </div>
-
-      <div>
-        <ul className="BlueBox">
-          <li className="Left"> Left</li>
-          <li className="Right"> Right</li>
-        </ul>
-      </div>
 
     </div>
   );
