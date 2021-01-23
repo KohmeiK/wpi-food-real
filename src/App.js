@@ -15,7 +15,6 @@ function App() {
   }
 
   function getLocations(time) {
-      console.log("ddddd")
         db.collection("locations").where("time", "==", time)
             .get()
             .then(function(querySnapshot) {
@@ -25,6 +24,13 @@ function App() {
         }).catch(function(error) {
           console.log("Error getting locations:", error);
       })
+  }
+
+  function getFoods(locationID) {
+      db.collection("locations").where()
+  }
+
+  function addReview() {
   }
 
   return (
