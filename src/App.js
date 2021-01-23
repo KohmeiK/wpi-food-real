@@ -6,7 +6,6 @@ import firebase from "firebase";
 import Image from 'react-bootstrap/Image'
 import Button from 'react-bootstrap/Button'
 import Dropdown from 'react-bootstrap/Dropdown'
-import Form from 'react-bootstrap/Form'
 
 function App() {
   const firebaseApp = firebase.apps[0];
@@ -40,10 +39,6 @@ function App() {
           </Dropdown>
         </li>
       </ul>
-
-      <Form>
-            <Form.Control placeholder="First name" />
-      </Form>
 
       <ul className="Content">
         <li>
