@@ -6,6 +6,7 @@ import firebase from "firebase";
 import Image from 'react-bootstrap/Image'
 import Button from 'react-bootstrap/Button'
 import Dropdown from 'react-bootstrap/Dropdown'
+import Jumbotron from 'react-bootstrap/Jumbotron'
 
 function App() {
   const firebaseApp = firebase.apps[0];
@@ -40,13 +41,14 @@ function App() {
         </li>
       </ul>
 
-      <u1 className="Welcome">
+      
+      <u1 className="text-center">
         <li>
         <h1 style={{color:"white"}}>Welcome, Name! Where do you want to eat?</h1>
         </li>
       </u1>
      
-      <ul className="Content">
+      <ul className="text-center">
         <li>
           <ul className="Locations">
             <li>

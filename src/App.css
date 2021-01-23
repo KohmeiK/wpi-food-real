@@ -6,12 +6,12 @@
   padding: 20px;
 }
 .Welcome{
-  display: flex;
+  textAlign: center;
   list-style-type: none;
   align-items: center;
   justify-content: space-between;
   align-self: center;
-  padding: 20px;
+
   
 }
 .Content{
