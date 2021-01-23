@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import firebase from "firebase/app";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 firebase.initializeApp({
