@@ -79,13 +79,15 @@ function LoggedInHome() {
             <h1 style={{color:"white"}}>Today's Ratings</h1>
             </li>
             {
-              locations && locations.map(locations=>{
+              locations && locations.map(location=>{
                 return(
                   <li>
                     <div className="location-container">
-                      <Button variant="dark" size="lg">
-                        <h2>{locations.name}   {locations.score}/5</h2>
-                      </Button>
+                      <Link to={`/${location.id}`}>
+                        <Button variant="dark" size="lg">
+                          <h2>{location.name}   {location.score}/5</h2>
+                        </Button>
+                      </Link>
                     </div>
                   </li>
                 )

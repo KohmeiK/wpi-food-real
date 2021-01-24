@@ -85,11 +85,9 @@ function SignInHome() {
                 return(
                   <li>
                     <div className="location-container">
-                      <Link to={`/${location.id}`}>
-                        <Button variant="dark" size="lg">
-                          <h2>{location.name}   {location.score}/5</h2>
-                        </Button>
-                      </Link>
+                      <Button variant="dark" size="lg">
+                        <h2>{location.name}   {location.score}/5</h2>
+                      </Button>
                     </div>
                   </li>
                 )

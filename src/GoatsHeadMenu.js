@@ -6,18 +6,27 @@ import firebase from "firebase";
 import Image from 'react-bootstrap/Image'
 import Button from 'react-bootstrap/Button'
 import Dropdown from 'react-bootstrap/Dropdown'
-import Form from 'react-bootstrap/Form'
 import FormControl from 'react-bootstrap/FormControl'
-import useParams from 'react-router-dom/useParams'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useParams
+} from "react-router-dom";
+
 
 function GoatsHeadMenu() {
   
   let { id } = useParams();
 
   var db = firebase.firestore();
+  const [foods,setFoods]=useState([])
+
+  const [location,setLocation]=useState()
+  const [loading, setLoading] = useState(true)
 
   const locationReference = db.collection('locations').doc(id)
-  const [foods,setFoods]=useState([])
 
   const fetchFood=async()=>{
     const foods = []
@@ -28,7 +37,7 @@ function GoatsHeadMenu() {
 
           let currentID = food.id
           let appObj = { ...food.data(), ['id:']: currentID }
-
+          
           foods.push(appObj)
           //console.log(foods);
         })
@@ -36,8 +45,26 @@ function GoatsHeadMenu() {
       })
   }
 
+  const fetchLocation = () => {
+    var docRef = locationReference;
+
+    docRef.get().then(function(doc) {
+        if (doc.exists) {
+            setLocation(doc.data())
+            setLoading(false)
+            console.log("Document data:", doc.data());
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+    });
+  }
+
   useEffect(() => {
     fetchFood();
+    fetchLocation();
   }, [])
 
   // The forwardRef is important!!
@@ -89,7 +116,7 @@ function GoatsHeadMenu() {
   );
 
   return (
-    <div className="App" style={{
+    <div className="App" style={{ 
       backgroundImage: "url(" + background + ")",
       backgroundPosition: 'center',
       backgroundSize: 'cover',
@@ -99,7 +126,7 @@ function GoatsHeadMenu() {
         <li><Image src={logo} roundedCircle /></li>
         <li>
           <Dropdown>
-
+            
             <Dropdown.Toggle variant="secondary" id="dropdown-basic">
               Name
             </Dropdown.Toggle>
@@ -108,7 +135,7 @@ function GoatsHeadMenu() {
               <Dropdown.Item href="#/action-1">Redeem Points</Dropdown.Item>
               <Dropdown.Item href="#/action-2">Log Out</Dropdown.Item>
             </Dropdown.Menu>
-
+            
           </Dropdown>
         </li>
       </ul>
@@ -117,7 +144,7 @@ function GoatsHeadMenu() {
         <li>
           <ul className="Menu">
             <li>
-              <h1 style={{color:"white"}}>Goat's Head Menu</h1>
+              <h1 style={{color:"white"}}>{loading ? 'loading' : location.name} Menu</h1>
             </li>
             {
               foods && foods.map(foods=>{
@@ -135,7 +162,7 @@ function GoatsHeadMenu() {
           </ul>
         </li>
         <li>
-          <u1 className="search">
+          <u1 className="search"> 
             <Dropdown>
               <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
                 Filter Menu
