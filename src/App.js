@@ -1,7 +1,7 @@
 import logo from "./Images/WPI_logo_name_small.png";
 import background from "./Images/FreshmanSkyscraper.png"
 import './App.css';
-import React from "react";
+import React, {useState,useEffect} from "react";
 import firebase from "firebase";
 import Image from 'react-bootstrap/Image'
 import Button from 'react-bootstrap/Button'
@@ -10,14 +10,31 @@ import Form from 'react-bootstrap/Form'
 import FormControl from 'react-bootstrap/FormControl'
 
 function App() {
-  const firebaseApp = firebase.apps[0];
-  //
-  // var db = firebase.firestore();
-  //
+  var db = firebase.firestore();
+  
+  const locationReference = db.collection('locations').doc('P5UuSiaMYnLLN6mE7zHN')
+  const [foods,setFoods]=useState([])
 
-  function function123(){
-    console.log("Hello World!")
+  const fetchFood=async()=>{
+    const foods = []
+    db.collection('foods').where("location", '==', locationReference).get()
+      .then(snapshot => {
+        snapshot.docs.forEach(food => {
+          console.log(food.id, " => ", food.data());
+
+          let currentID = food.id
+          let appObj = { ...food.data(), ['id:']: currentID }
+          
+          foods.push(appObj)
+          //console.log(foods);
+        })
+        setFoods(foods)
+      })
   }
+
+  useEffect(() => {
+    fetchFood();
+  }, [])
 
   return (
     <div className="App" style={{ 
@@ -44,65 +61,34 @@ function App() {
         </li>
       </ul>
 
-      
-
-      {/*<Form>
-        <Form.Control placeholder="Search Food" />
-      </Form> */}
-         <u1 className="text-center"> 
-            <Form inline>
-            <FormControl type="text" placeholder="Filter foods" className="mr-sm-2" />
-            <Button variant="dark">Search</Button>
-            </Form>
-          </u1>
       <ul className="Content">
         <li>
- 
-          
-          <ul className="Locations">
+          <ul className="Menu">
             <li>
-              <h1 style={{color:"white"}}>Locations</h1>
+              <h1 style={{color:"white"}}>Goat's Head Menu</h1>
             </li>
-            <li>
-              <Button variant="dark" size="lg">
-                <h2>Goats Head</h2>
-              </Button>{' '}
-            </li>
-            <li>
-              <Button variant="dark" size="lg">
-                <h2>Morgan</h2>
-              </Button>{' '}
-            </li>
-            <li>
-              <Button variant="dark" size="lg">
-                <h2>Foise</h2>
-              </Button>{' '}
-            </li>
+            {
+              foods && foods.map(foods=>{
+                return(
+                  <li>
+                    <div className="location-container">
+                      <Button variant="dark" size="sm">
+                        <h2>{foods.name}</h2>
+                      </Button>
+                    </div>
+                  </li>
+                )
+              })
+            }
           </ul>
         </li>
         <li>
-          <ul className="Hots">
-            <li>
-              <h1 style={{color:"white"}}>Suggestions</h1>
-            </li>
-            <li>
-              <Button variant="light" size="lg">
-                <h2>DON'T FORGET TO LEAVE A REVIEW</h2>
-              </Button>{' '}
-            </li>
-            <li>
-              <Button variant="dark" size="lg">
-                <h6>Goat's Head</h6>
-                <h2>Cheese Borgor</h2>
-              </Button>{' '}
-            </li>
-            <li>
-              <Button variant="dark" size="lg">
-                <h6>Morgan</h6>
-                <h2>Pizza</h2>
-              </Button>{' '}
-            </li>
-          </ul>
+          <u1 className="text-center"> 
+            <Form inline>
+              <FormControl type="text" placeholder="Filter foods" className="mr-sm-2" />
+              <Button variant="dark">Search</Button>
+            </Form>
+          </u1>
         </li>
       </ul>
 

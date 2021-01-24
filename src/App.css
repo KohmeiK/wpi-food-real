@@ -15,18 +15,10 @@
   margin: 0px 500px;
 }
 
-.Locations{
+.Menu{
   list-style-type: none;
   padding: 20px;
 }
-.Locations > li{
-  margin: 10px 0px;
-}
-
-.Hots{
-  list-style-type: none;
-  padding: 20px;
-}
-.Hots > li{
-  margin: 10px 0px;
+.Menu > li{
+  margin: 5px 0px;
 }
