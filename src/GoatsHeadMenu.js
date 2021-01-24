@@ -8,11 +8,15 @@ import Button from 'react-bootstrap/Button'
 import Dropdown from 'react-bootstrap/Dropdown'
 import Form from 'react-bootstrap/Form'
 import FormControl from 'react-bootstrap/FormControl'
+import useParams from 'react-router-dom/useParams'
 
 function GoatsHeadMenu() {
+  
+  let { id } = useParams();
+
   var db = firebase.firestore();
 
-  const locationReference = db.collection('locations').doc('P5UuSiaMYnLLN6mE7zHN')
+  const locationReference = db.collection('locations').doc(id)
   const [foods,setFoods]=useState([])
 
   const fetchFood=async()=>{
