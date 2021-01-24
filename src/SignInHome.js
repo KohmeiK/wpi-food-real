@@ -52,7 +52,8 @@ function SignInHome() {
       backgroundImage: "url(" + background + ")",
       backgroundPosition: 'center',
       backgroundSize: 'cover',
-      backgroundRepeat: 'no-repeat'
+      backgroundRepeat: 'no-repeat',
+      height: "100vh"
     }}>
       <ul className="TopBar">
         <li><Image src={logo} roundedCircle /></li>

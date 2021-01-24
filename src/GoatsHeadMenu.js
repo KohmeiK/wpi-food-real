@@ -17,7 +17,7 @@ import {
 
 
 function GoatsHeadMenu() {
-  
+
   let { id } = useParams();
 
   var db = firebase.firestore();
@@ -37,7 +37,7 @@ function GoatsHeadMenu() {
 
           let currentID = food.id
           let appObj = { ...food.data(), ['id:']: currentID }
-          
+
           foods.push(appObj)
           //console.log(foods);
         })
@@ -116,17 +116,18 @@ function GoatsHeadMenu() {
   );
 
   return (
-    <div className="App" style={{ 
+    <div className="App" style={{
       backgroundImage: "url(" + background + ")",
       backgroundPosition: 'center',
       backgroundSize: 'cover',
-      backgroundRepeat: 'no-repeat'
+      backgroundRepeat: 'no-repeat',
+      height: "100vh"
     }}>
       <ul className="TopBar">
         <li><Link to="/loggedin"><Image src={logo} roundedCircle /></Link></li>
         <li>
           <Dropdown>
-            
+
             <Dropdown.Toggle variant="secondary" id="dropdown-basic">
               Name
             </Dropdown.Toggle>
@@ -135,7 +136,7 @@ function GoatsHeadMenu() {
               <Dropdown.Item href="#/action-1">Redeem Points</Dropdown.Item>
               <Link to="/"><Dropdown.Item href="#/action-2">Log Out</Dropdown.Item></Link>
             </Dropdown.Menu>
-            
+
           </Dropdown>
         </li>
       </ul>
@@ -162,7 +163,7 @@ function GoatsHeadMenu() {
           </ul>
         </li>
         <li>
-          <u1 className="search"> 
+          <u1 className="search">
             <Dropdown>
               <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
                 Filter Menu
