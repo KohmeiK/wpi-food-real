@@ -25,11 +25,13 @@ function SignInHome() {
     db.collection('locations').get()
         .then(snapshot => {
           snapshot.docs.forEach(location => {
-            console.log(location.id, " => ", location.data());
+            //console.log(location.id, " => ", location.data());
 
             let currentID = location.id
             let appObj = { ...location.data(), ['id']: currentID }
             locations.push(appObj)
+
+            console.log(locations[0].id);
 
             //locations.push(location.data())
           })
@@ -57,11 +59,11 @@ function SignInHome() {
         <li>
           <ul className="LoginBox">
             <li>
-              <Button variant="light">
-                <Link to="/loggedin">
-                  Login
-                </Link>
-              </Button>
+              <Link to="/loggedin">
+                <Button variant="light">
+                    Login
+                </Button>
+              </Link>
             </li>
             <li>
               <Button variant="dark">
@@ -79,13 +81,15 @@ function SignInHome() {
               <h1 style={{color:"white"}}>Today's Ratings</h1>
             </li>
             {
-              locations && locations.map(locations=>{
+              locations && locations.map(location=>{
                 return(
                   <li>
                     <div className="location-container">
-                      <Button variant="dark" size="lg">
-                        <h2>{locations.name}   {locations.score}/5</h2>
-                      </Button>
+                      <Link to={"/" + toString(location.id)}>
+                        <Button variant="dark" size="lg">
+                          <h2>{location.name}   {location.score}/5</h2>
+                        </Button>
+                      </Link>
                     </div>
                   </li>
                 )
@@ -100,14 +104,17 @@ function SignInHome() {
             </li>
             {
               locations && locations.map(locations=>{
-                var topFood = locations.topFood;
+                let topFood = locations.topFood;
+                let location = locations.name;
                 return(
                   <li>
                     <div className="suggestion-container">
-                      <Button variant="dark" size="lg">
-                      <h6>{locations.name}</h6>
-                      <h2>{topFood}</h2>
-                      </Button>
+                      <Link to="/loggedin">
+                        <Button variant="dark" size="lg">
+                        <h6>{location}</h6>
+                        <h2>{topFood}</h2>
+                        </Button>
+                      </Link>
                     </div>
                   </li>
                 )

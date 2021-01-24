@@ -1,7 +1,7 @@
 import logo from "./Images/WPI_logo_name_small.png";
 import background from "./Images/FreshmanSkyscraper.png"
 import './App.css';
-import React from "react";
+import React, {useState,useEffect} from "react";
 import firebase from "firebase";
 import Image from 'react-bootstrap/Image'
 import Button from 'react-bootstrap/Button'
@@ -29,9 +29,7 @@ function App() {
           <Route path="/daka">
             <GoatsHeadMenu />
           </Route>
-          <Route path="/goatshead">
-            <GoatsHeadMenu />
-          </Route>
+          <Route path="/:id" children={<GoatsHeadMenu />}/>
           <Route path="/">
             <SignInHome />
           </Route>

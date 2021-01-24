@@ -6,6 +6,12 @@ import firebase from "firebase";
 import Image from 'react-bootstrap/Image'
 import Button from 'react-bootstrap/Button'
 import Dropdown from 'react-bootstrap/Dropdown'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 
 function LoggedInHome() {
@@ -53,7 +59,7 @@ function LoggedInHome() {
 
             <Dropdown.Menu>
               <Dropdown.Item href="#/action-1">Redeem Points</Dropdown.Item>
-              <Dropdown.Item href="#/action-2">Log Out</Dropdown.Item>
+              <Link to="/"><Dropdown.Item href="#/action-2">Log Out</Dropdown.Item></Link>
             </Dropdown.Menu>
           </Dropdown>
         </li>
