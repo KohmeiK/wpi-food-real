@@ -1,0 +1,44 @@
+.TopBar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    list-style-type: none;
+    padding: 20px;
+  }
+  
+  .LoginBox{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    list-style-type: none;
+    padding: 0px;
+  }
+  .LoginBox > li{
+    margin: 0px 10px;
+  }
+  
+  .Content{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    list-style-type: none;
+    padding: 20px;
+    margin: 0px 500px;
+  }
+  
+  .Locations{
+    list-style-type: none;
+    padding: 40px;
+  }
+  .Locations > li{
+    margin: 20px 0px;
+  }
+  
+  .Hots{
+    list-style-type: none;
+    padding: 20px;
+  }
+  .Hots > li{
+    margin: 10px 0px;
+  }
+  

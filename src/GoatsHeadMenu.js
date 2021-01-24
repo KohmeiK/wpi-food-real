@@ -28,21 +28,48 @@ function GoatsHeadMenu() {
 
   const locationReference = db.collection('locations').doc(id)
 
-  const fetchFood=async()=>{
-    const foods = []
-    db.collection('foods').where("location", '==', locationReference).get()
-      .then(snapshot => {
-        snapshot.docs.forEach(food => {
-          console.log(food.id, " => ", food.data());
+  function getFoodName(path) {
+    var docRef = db.doc(path)
+    docRef.get().then(function(doc) {
+      return doc.data()["name"]
+    })
+  }
+  
+  function getFoodData(path) {
+    var docRef = db.doc(path)
+    docRef.get().then(function(doc) {
+      return doc.data()
+    })
+  }
 
-          let currentID = food.id
-          let appObj = { ...food.data(), ['id:']: currentID }
-          
-          foods.push(appObj)
-          //console.log(foods);
+  const fetchFood= async()=>{
+    const foods = []
+    /*
+    var docRef = db.collection('locations').doc("P5UuSiaMYnLLN6mE7zHN").collection('currentFoods')
+    let snapshot = await docRef.get()
+    console.log(snapshot.docs[0].data())
+    snapshot.docs.forEach((food) => {
+      let currentID = food.id
+      let foodData = getFoodData(food.food)
+      let appObj = { ...foodData, ['id']: currentID }
+      console.log(food.id, " => ", foodData)
+      foods.push(appObj)
+    })*/
+
+    db.collection('locations').get().then(snapshot => {
+      snapshot.docs.forEach(currentFoods => {
+        currentFoods.get().then(query => {
+          query.docs.forEach(food => {
+            let currentID = food.id
+            let foodData = getFoodData(food.food)
+            let appObj = { ...foodData, ['id']: currentID }
+            console.log(food.id, " => ", foodData)
+            foods.push(appObj)
+          })
         })
-        setFoods(foods)
       })
+    })
+    setFoods(foods);
   }
 
   const fetchLocation = () => {
@@ -107,7 +134,7 @@ function GoatsHeadMenu() {
           <ul className="list-unstyled">
             {React.Children.toArray(children).filter(
               (child) =>
-                !value || child.props.children.toLowerCase().startsWith(value),
+                !value || child.props.children.toString().toLowerCase().startsWith(value),
             )}
           </ul>
         </div>
@@ -147,13 +174,15 @@ function GoatsHeadMenu() {
               <h1 style={{color:"white"}}>{loading ? 'loading' : location.name} Menu</h1>
             </li>
             {
-              foods && foods.map(foods=>{
+              foods && foods.map(food=>{
                 return(
                   <li>
                     <div className="location-container">
-                      <Button variant="dark" size="sm">
-                        <h2>{foods.name}</h2>
-                      </Button>
+                    <Link to={`/food/${food.id}`}>
+                        <Button variant="dark" size="sm">
+                          <h2>{food.name}</h2>
+                        </Button>
+                    </Link>
                     </div>
                   </li>
                 )
@@ -169,11 +198,13 @@ function GoatsHeadMenu() {
               </Dropdown.Toggle>
               <Dropdown.Menu as={CustomMenu}>
                 {
-                  foods && foods.map(foods=>{
+                  foods && foods.map(food=>{
                     return(
-                      <Dropdown.Item>
-                            {foods.name}
-                      </Dropdown.Item>
+                      <Link to={`/food/${food.id}`}>
+                        <Dropdown.Item>
+                              {food.name}
+                        </Dropdown.Item>
+                      </Link>
                     )
                   })
                 }

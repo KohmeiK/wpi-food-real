@@ -50,7 +50,7 @@ function LoggedInHome() {
       backgroundRepeat: 'no-repeat'
     }}>
       <ul className="TopBar">
-        <li><Link to="/"><Image src={logo} roundedCircle /></Link></li>
+        <li><Link to="/loggedin"><Image src={logo} roundedCircle /></Link></li>
         <li>
           <Dropdown>
             <Dropdown.Toggle variant="secondary" id="dropdown-basic">
@@ -83,7 +83,7 @@ function LoggedInHome() {
                 return(
                   <li>
                     <div className="location-container">
-                      <Link to={`/${location.id}`}>
+                      <Link to={`/location/${location.id}`}>
                         <Button variant="dark" size="lg">
                           <h2>{location.name}   {location.score}/5</h2>
                         </Button>
