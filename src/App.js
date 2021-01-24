@@ -7,6 +7,7 @@ import Image from 'react-bootstrap/Image'
 import Button from 'react-bootstrap/Button'
 import Dropdown from 'react-bootstrap/Dropdown'
 import Form from 'react-bootstrap/Form'
+import FormControl from 'react-bootstrap/FormControl'
 
 function App() {
   const firebaseApp = firebase.apps[0];
@@ -29,6 +30,7 @@ function App() {
         <li><Image src={logo} roundedCircle /></li>
         <li>
           <Dropdown>
+            
             <Dropdown.Toggle variant="secondary" id="dropdown-basic">
               Name
             </Dropdown.Toggle>
@@ -37,16 +39,26 @@ function App() {
               <Dropdown.Item href="#/action-1">Redeem Points</Dropdown.Item>
               <Dropdown.Item href="#/action-2">Log Out</Dropdown.Item>
             </Dropdown.Menu>
+            
           </Dropdown>
         </li>
       </ul>
 
-      <Form>
-        <Form.Control placeholder="Search Food" />
-      </Form>
+      
 
+      {/*<Form>
+        <Form.Control placeholder="Search Food" />
+      </Form> */}
+         <u1 className="text-center"> 
+            <Form inline>
+            <FormControl type="text" placeholder="Filter foods" className="mr-sm-2" />
+            <Button variant="dark">Search</Button>
+            </Form>
+          </u1>
       <ul className="Content">
         <li>
+ 
+          
           <ul className="Locations">
             <li>
               <h1 style={{color:"white"}}>Locations</h1>
