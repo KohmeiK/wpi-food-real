@@ -1,22 +1,45 @@
 import logo from "./Images/WPI_logo_name_small.png";
 import background from "./Images/FreshmanSkyscraper.png"
 import './App.css';
-import React from "react";
+import React, {useState,useEffect} from "react";
 import firebase from "firebase";
 import Image from 'react-bootstrap/Image'
 import Button from 'react-bootstrap/Button'
+import Dropdown from 'react-bootstrap/Dropdown'
 
 import ReactStars from "react-rating-stars-component";
 
 function App() {
   const firebaseApp = firebase.apps[0];
-  //
-  // var db = firebase.firestore();
-  //
+  
+  var db = firebase.firestore();
+  
+  const [food,setFood]=useState()
+  const [loading, setLoading] = useState(true)
 
-  function function123(){
-    console.log("Hello World!")
+  const fetchFood = () => {
+   
+    var docRef = db.collection('foods').doc('y1Q1mD09L8CAa79tzZPI');
+
+    docRef.get().then(function(doc) {
+        if (doc.exists) {
+            setFood(doc.data())
+            setLoading(false)
+            console.log("Document data:", doc.data());
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+    });
   }
+
+  useEffect(() => {
+    fetchFood();
+  }, [])
+
+
 
   const thirdExample = {
     size: 40,
@@ -40,18 +63,16 @@ function App() {
       <ul className="TopBar">
         <li><Image src={logo} roundedCircle /></li>
         <li>
-          <ul className="LoginBox">        
-            <li>
-              <Button variant="light">
-                Login
-              </Button>
-            </li>
-            <li>
-              <Button variant="dark">
-                Sign Up
-              </Button>{' '}
-            </li>
-          </ul>
+          <Dropdown>
+            <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+              Name
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              <Dropdown.Item href="#/action-1">Redeem Points</Dropdown.Item>
+              <Dropdown.Item href="#/action-2">Log Out</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         </li>
       </ul>
 
@@ -59,8 +80,8 @@ function App() {
         <li>
           <ul className="Locations">
             <li>
-              <h1 style={{color:"white"}}>FOOD 1: BORGAR???</h1>
-              <h1 style={{color:"white"}}>???/5 (average rating)</h1>
+              <h1 style={{color:"white"}}>{loading ? 'loading' : food.name}</h1>
+              <h1 style={{color:"white"}}>{loading ? 'loading' : food.score}/5 (average rating)</h1>
               <ReactStars {...thirdExample} />
               <li>
               <Button variant="dark">
