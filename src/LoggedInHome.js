@@ -1,6 +1,6 @@
 import logo from "./Images/WPI_logo_name_small.png";
 import background from "./Images/FreshmanSkyscraper.png"
-import './App.css';
+import './LoggedInHome.css';
 import React, {useState,useEffect} from "react";
 import firebase from "firebase";
 import Image from 'react-bootstrap/Image'
@@ -37,7 +37,7 @@ function LoggedInHome() {
   }, [])
 
   return (
-    <div className="App" style={{ 
+    <div className="App" style={{
       backgroundImage: "url(" + background + ")",
       backgroundPosition: 'center',
       backgroundSize: 'cover',
@@ -59,13 +59,13 @@ function LoggedInHome() {
         </li>
       </ul>
 
-      
+
       <u1 className="text-center">
         <li>
         <h1 style={{color:"white"}}>Welcome, Name! Where do you want to eat?</h1>
         </li>
       </u1>
-     
+
       <ul className="text-center">
         <li>
           <ul className="Locations">
@@ -88,7 +88,7 @@ function LoggedInHome() {
           </ul>
         </li>
         <li>
-          
+
         </li>
       </ul>
 
@@ -96,4 +96,4 @@ function LoggedInHome() {
   );
 }
 
-export default App;
+export default LoggedInHome;

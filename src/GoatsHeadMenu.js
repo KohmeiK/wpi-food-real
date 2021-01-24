@@ -1,6 +1,6 @@
 import logo from "./Images/WPI_logo_name_small.png";
 import background from "./Images/FreshmanSkyscraper.png"
-import './App.css';
+import './GoatsHeadMenu.css';
 import React, {useState,useEffect} from "react";
 import firebase from "firebase";
 import Image from 'react-bootstrap/Image'
@@ -11,7 +11,7 @@ import FormControl from 'react-bootstrap/FormControl'
 
 function GoatsHeadMenu() {
   var db = firebase.firestore();
-  
+
   const locationReference = db.collection('locations').doc('P5UuSiaMYnLLN6mE7zHN')
   const [foods,setFoods]=useState([])
 
@@ -24,7 +24,7 @@ function GoatsHeadMenu() {
 
           let currentID = food.id
           let appObj = { ...food.data(), ['id:']: currentID }
-          
+
           foods.push(appObj)
           //console.log(foods);
         })
@@ -85,7 +85,7 @@ function GoatsHeadMenu() {
   );
 
   return (
-    <div className="App" style={{ 
+    <div className="App" style={{
       backgroundImage: "url(" + background + ")",
       backgroundPosition: 'center',
       backgroundSize: 'cover',
@@ -95,7 +95,7 @@ function GoatsHeadMenu() {
         <li><Image src={logo} roundedCircle /></li>
         <li>
           <Dropdown>
-            
+
             <Dropdown.Toggle variant="secondary" id="dropdown-basic">
               Name
             </Dropdown.Toggle>
@@ -104,7 +104,7 @@ function GoatsHeadMenu() {
               <Dropdown.Item href="#/action-1">Redeem Points</Dropdown.Item>
               <Dropdown.Item href="#/action-2">Log Out</Dropdown.Item>
             </Dropdown.Menu>
-            
+
           </Dropdown>
         </li>
       </ul>
@@ -131,7 +131,7 @@ function GoatsHeadMenu() {
           </ul>
         </li>
         <li>
-          <u1 className="search"> 
+          <u1 className="search">
             <Dropdown>
               <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
                 Filter Menu
@@ -156,4 +156,4 @@ function GoatsHeadMenu() {
   );
 }
 
-export default App;
+export default GoatsHeadMenu;

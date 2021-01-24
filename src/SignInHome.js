@@ -1,16 +1,23 @@
 import logo from "./Images/WPI_logo_name_small.png";
 import background from "./Images/FreshmanSkyscraper.png"
-import './App.css';
+import './SignInHome.css';
 import React, {useState,useEffect} from "react";
 import firebase from "firebase";
 import Image from 'react-bootstrap/Image'
 import Button from 'react-bootstrap/Button'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+
 
 function SignInHome() {
   const firebaseApp = firebase.apps[0];
-  
+
   var db = firebase.firestore();
-  
+
   const [locations,setLocations]=useState([])
 
   const fetchLocation=async()=>{
@@ -39,7 +46,7 @@ function SignInHome() {
   }
 
   return (
-    <div className="App" style={{ 
+    <div className="App" style={{
       backgroundImage: "url(" + background + ")",
       backgroundPosition: 'center',
       backgroundSize: 'cover',
@@ -48,10 +55,12 @@ function SignInHome() {
       <ul className="TopBar">
         <li><Image src={logo} roundedCircle /></li>
         <li>
-          <ul className="LoginBox">        
+          <ul className="LoginBox">
             <li>
               <Button variant="light">
-                Login
+                <Link to="/loggedin">
+                  Login
+                </Link>
               </Button>
             </li>
             <li>
@@ -112,4 +121,4 @@ function SignInHome() {
   );
 }
 
-export default App;
+export default SignInHome;

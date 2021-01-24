@@ -13,8 +13,8 @@ import {
 } from "react-router-dom";
 
 import GoatsHeadMenu from "./GoatsHeadMenu"
-import LoggedInHome from "./GoatsHeadMenu"
-import SignInHome from "./GoatsHeadMenu"
+import LoggedInHome from "./LoggedInHome"
+import SignInHome from "./SignInHome"
 // import GoatsHeadMenu from "./GoatsHeadMenu"
 
 
@@ -23,9 +23,6 @@ function App() {
   return (
     <Router>
         <Switch>
-          <Route path="/">
-            <SignInHome />
-          </Route>
           <Route path="/loggedin">
             <LoggedInHome />
           </Route>
@@ -34,6 +31,9 @@ function App() {
           </Route>
           <Route path="/goatshead">
             <GoatsHeadMenu />
+          </Route>
+          <Route path="/">
+            <SignInHome />
           </Route>
         </Switch>
     </Router>
