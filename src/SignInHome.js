@@ -52,7 +52,8 @@ function SignInHome() {
       backgroundImage: "url(" + background + ")",
       backgroundPosition: 'center',
       backgroundSize: 'cover',
-      backgroundRepeat: 'no-repeat'
+      backgroundRepeat: 'no-repeat',
+      height: "100vh"
     }}>
       <ul className="TopBar">
         <li><Image src={logo} roundedCircle /></li>
@@ -85,7 +86,7 @@ function SignInHome() {
                 return(
                   <li>
                     <div className="location-container">
-                      <Button variant="dark" size="lg">
+                      <Button variant="dark" size="lg" active>
                         <h2>{location.name}   {location.score}/5</h2>
                       </Button>
                     </div>
@@ -107,7 +108,7 @@ function SignInHome() {
                 return(
                   <li>
                     <div className="suggestion-container">
-                      <Button variant="dark" size="lg">
+                      <Button variant="dark" size="lg" active>
                         <h6>{location}</h6>
                         <h2>{topFood}</h2>
                       </Button>

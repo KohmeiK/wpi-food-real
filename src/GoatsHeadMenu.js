@@ -36,7 +36,7 @@ function GoatsHeadMenu() {
   }
   
   function getFoodData(path) {
-    var docRef = db.doc(path)
+    var docRef = db.doc(`${path}`)
     docRef.get().then(function(doc) {
       return doc.data()
     })
@@ -44,32 +44,23 @@ function GoatsHeadMenu() {
 
   const fetchFood= async()=>{
     const foods = []
-    /*
-    var docRef = db.collection('locations').doc("P5UuSiaMYnLLN6mE7zHN").collection('currentFoods')
+    
+    var docRef = db.collection('locations').doc(id).collection('currentFoods')
     let snapshot = await docRef.get()
-    console.log(snapshot.docs[0].data())
-    snapshot.docs.forEach((food) => {
-      let currentID = food.id
-      let foodData = getFoodData(food.food)
-      let appObj = { ...foodData, ['id']: currentID }
-      console.log(food.id, " => ", foodData)
-      foods.push(appObj)
-    })*/
 
-    db.collection('locations').get().then(snapshot => {
-      snapshot.docs.forEach(currentFoods => {
-        currentFoods.get().then(query => {
-          query.docs.forEach(food => {
-            let currentID = food.id
-            let foodData = getFoodData(food.food)
-            let appObj = { ...foodData, ['id']: currentID }
-            console.log(food.id, " => ", foodData)
-            foods.push(appObj)
-          })
-        })
+    let temp = await snapshot.docs[0].data().food.get()
+    console.log(temp.data().name)
+
+    snapshot.docs.forEach((food) => {
+      food.data().food.get().then(function(doc){
+        let currentID = doc.id
+        let foodData = doc.data()
+        let appObj = { ...foodData, ['id']: currentID }
+        console.log(food.id, " => ", foodData)
+        foods.push(appObj)
       })
     })
-    setFoods(foods);
+    setTimeout(() => {  setFoods(foods); }, 200);
   }
 
   const fetchLocation = () => {
@@ -147,7 +138,8 @@ function GoatsHeadMenu() {
       backgroundImage: "url(" + background + ")",
       backgroundPosition: 'center',
       backgroundSize: 'cover',
-      backgroundRepeat: 'no-repeat'
+      backgroundRepeat: 'no-repeat',
+      height: "100vh"
     }}>
       <ul className="TopBar">
         <li><Link to="/loggedin"><Image src={logo} roundedCircle /></Link></li>
