@@ -133,7 +133,7 @@ function GoatsHeadMenu() {
 
             <Dropdown.Menu>
               <Dropdown.Item href="#/action-1">Redeem Points</Dropdown.Item>
-              <Dropdown.Item href="#/action-2">Log Out</Dropdown.Item>
+              <Link to="/"><Dropdown.Item href="#/action-2">Log Out</Dropdown.Item></Link>
             </Dropdown.Menu>
             
           </Dropdown>
