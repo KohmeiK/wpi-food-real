@@ -18,14 +18,40 @@ function App() {
   const [food,setFood]=useState()
   const [loading, setLoading] = useState(true)
 
-  var temp = 0;
+  var starRating = 0;
 
-  function storeDB(){
-    const data = {
-      value: temp,
-    }
-    console.log(data)
-    const res = db.collection('foods').doc('y1Q1mD09L8CAa79tzZPI').collection('ratings').add;
+  function rate(score, comment){
+
+    var foodPath = ""
+
+    var docRef = db.collection("locations")
+        .get()
+        .then(function(querySnapshot) {
+          querySnapshot.forEach(function(doc) {
+            var locID = doc.id
+            var docRef2 = db.collection("locations/" + locID+ "/currentFoods")
+                .get()
+                .then(function(querySnapshot2) {
+                  querySnapshot2.forEach(function(doc2) {
+                    if (doc2.id == id) {
+                      foodPath = doc2.data()["food"]
+                    }
+                  })
+                })
+          })
+        })
+
+    var docRef3 = db.collection(foodPath + "/ratings").set({
+
+    })
+
+  }
+
+  function getFoodName(path) {
+    var docRef = db.doc(path)
+    docRef.get().then(function(doc) {
+      return doc.data()["name"]
+    })
   }
 
   const fetchFood = () => {
@@ -52,7 +78,7 @@ function App() {
 
 
 
-  const thirdExample = {
+  const starFormat = {
     size: 40,
     count: 5,
     isHalf: false,
@@ -60,7 +86,7 @@ function App() {
     color: "black",
     activeColor: "red",
     onChange: newValue => {
-      temp = newValue;
+      starRating = newValue;
       console.log(newValue)
     }
   };
@@ -94,9 +120,9 @@ function App() {
             <li>
               <h1 style={{color:"white"}}>{loading ? 'loading' : food.name}</h1>
               <h1 style={{color:"white"}}>{loading ? 'loading' : food.score}/5 (average rating)</h1>
-              <ReactStars {...thirdExample} />
+              <ReactStars id="ratings" {...starFormat} />
               <li>
-                <Button variant="dark" onClick={storeDB}>
+                <Button variant="dark" onClick={() => getFoodName()}>
                   Submit
                 </Button>{' '}
               </li>
