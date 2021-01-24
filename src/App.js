@@ -36,6 +36,54 @@ function App() {
     fetchFood();
   }, [])
 
+  // The forwardRef is important!!
+  // Dropdown needs access to the DOM node in order to position the Menu
+  const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
+    <a
+      href=""
+      ref={ref}
+      onClick={(e) => {
+        e.preventDefault();
+        onClick(e);
+      }}
+    >
+      <Button variant="dark" size="md">
+        <h3>{children}</h3>
+      </Button>
+    </a>
+  ));
+
+  // forwardRef again here!
+  // Dropdown needs access to the DOM of the Menu to measure it
+  const CustomMenu = React.forwardRef(
+    ({ children, style, className, 'aria-labelledby': labeledBy }, ref) => {
+      const [value, setValue] = useState('');
+
+      return (
+        <div
+          ref={ref}
+          style={style}
+          className={className}
+          aria-labelledby={labeledBy}
+        >
+          <FormControl
+            autoFocus
+            className="mx-3 my-2 w-auto"
+            placeholder="Type to filter..."
+            onChange={(e) => setValue(e.target.value)}
+            value={value}
+          />
+          <ul className="list-unstyled">
+            {React.Children.toArray(children).filter(
+              (child) =>
+                !value || child.props.children.toLowerCase().startsWith(value),
+            )}
+          </ul>
+        </div>
+      );
+    },
+  );
+
   return (
     <div className="App" style={{ 
       backgroundImage: "url(" + background + ")",
@@ -83,11 +131,23 @@ function App() {
           </ul>
         </li>
         <li>
-          <u1 className="text-center"> 
-            <Form inline>
-              <FormControl type="text" placeholder="Filter foods" className="mr-sm-2" />
-              <Button variant="dark">Search</Button>
-            </Form>
+          <u1 className="search"> 
+            <Dropdown>
+              <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
+                Filter Menu
+              </Dropdown.Toggle>
+              <Dropdown.Menu as={CustomMenu}>
+                {
+                  foods && foods.map(foods=>{
+                    return(
+                      <Dropdown.Item>
+                            {foods.name}
+                      </Dropdown.Item>
+                    )
+                  })
+                }
+              </Dropdown.Menu>
+            </Dropdown>,
           </u1>
         </li>
       </ul>
