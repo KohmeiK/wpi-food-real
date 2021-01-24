@@ -8,7 +8,7 @@ import Button from 'react-bootstrap/Button'
 import Dropdown from 'react-bootstrap/Dropdown'
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup'
 import Accordion from 'react-bootstrap/Accordion'
-import ReactStars from "react-rating-stars-component";
+import ReactStars from 'react-rating-stars-component';
 
 function App() {
   const firebaseApp = firebase.apps[0];
@@ -24,6 +24,7 @@ function App() {
     const data = {
       value: temp,
     }
+    console.log(data)
     const res = db.collection('foods').doc('y1Q1mD09L8CAa79tzZPI').collection('ratings').add;
   }
 
@@ -60,6 +61,7 @@ function App() {
     activeColor: "red",
     onChange: newValue => {
       temp = newValue;
+      console.log(newValue)
     }
   };
 
@@ -94,9 +96,9 @@ function App() {
               <h1 style={{color:"white"}}>{loading ? 'loading' : food.score}/5 (average rating)</h1>
               <ReactStars {...thirdExample} />
               <li>
-              <Button variant="dark" onClick={storeDB()}>
-                Submit
-              </Button>{' '}
+                <Button variant="dark" onClick={storeDB}>
+                  Submit
+                </Button>{' '}
               </li>
             </li>
             
