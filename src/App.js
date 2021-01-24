@@ -42,7 +42,10 @@ function App() {
         })
 
     var docRef3 = db.collection(foodPath + "/ratings").set({
-
+      user : db.doc("users/" + userID),
+      score: score,
+      date: time,
+      comment: comment,
     })
 
   }
