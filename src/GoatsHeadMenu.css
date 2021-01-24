@@ -1,0 +1,25 @@
+.TopBar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    list-style-type: none;
+    padding: 20px;
+  }
+  
+  .Content{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    list-style-type: none;
+    padding: 20px;
+    margin: 0px 500px;
+  }
+  
+  .Menu{
+    list-style-type: none;
+    padding: 20px;
+  }
+  .Menu > li{
+    margin: 5px 0px;
+  }
+  
