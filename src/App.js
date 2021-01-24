@@ -11,9 +11,12 @@ import FormControl from 'react-bootstrap/FormControl'
 
 function App() {
   var db = firebase.firestore();
-  
-  const locationReference = db.collection('locations').doc('P5UuSiaMYnLLN6mE7zHN')
   const [foods,setFoods]=useState([])
+
+  const [location,setLocation]=useState()
+  const [loading, setLoading] = useState(true)
+
+  const locationReference = db.collection('locations').doc('P5UuSiaMYnLLN6mE7zHN')
 
   const fetchFood=async()=>{
     const foods = []
@@ -32,8 +35,26 @@ function App() {
       })
   }
 
+  const fetchLocation = () => {
+    var docRef = locationReference;
+
+    docRef.get().then(function(doc) {
+        if (doc.exists) {
+            setLocation(doc.data())
+            setLoading(false)
+            console.log("Document data:", doc.data());
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+    });
+  }
+
   useEffect(() => {
     fetchFood();
+    fetchLocation();
   }, [])
 
   // The forwardRef is important!!
@@ -113,7 +134,7 @@ function App() {
         <li>
           <ul className="Menu">
             <li>
-              <h1 style={{color:"white"}}>Goat's Head Menu</h1>
+              <h1 style={{color:"white"}}>{loading ? 'loading' : location.name} Menu</h1>
             </li>
             {
               foods && foods.map(foods=>{
