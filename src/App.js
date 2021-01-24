@@ -91,12 +91,13 @@ function App() {
             </li>
             {
               locations && locations.map(locations=>{
+                var topFood = locations.topFood;
                 return(
                   <li>
                     <div className="suggestion-container">
                       <Button variant="dark" size="lg">
                       <h6>{locations.name}</h6>
-                      <h2>{locations.topFood}</h2>
+                      <h2>{topFood}</h2>
                       </Button>
                     </div>
                   </li>
