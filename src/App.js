@@ -11,14 +11,23 @@ function App() {
   
   var db = firebase.firestore();
   
-  const [locations,setLocation]=useState([])
+  const [locations,setLocations]=useState([])
 
   const fetchLocation=async()=>{
-    const response=db.collection('locations');
-    const data=await response.get();
-    data.docs.forEach(item=>{
-     setLocation([...locations,item.data()])
-    })
+    const locations = []
+    db.collection('locations').get()
+        .then(snapshot => {
+          snapshot.docs.forEach(location => {
+            console.log(location.id, " => ", location.data());
+
+            let currentID = location.id
+            let appObj = { ...location.data(), ['id']: currentID }
+            locations.push(appObj)
+
+            //locations.push(location.data())
+          })
+          setLocations(locations)
+        })
   }
 
   useEffect(() => {
@@ -63,11 +72,13 @@ function App() {
             {
               locations && locations.map(locations=>{
                 return(
-                  <div className="location-container" key={locations}>
-                    <Button variant="dark" size="lg">
-                      <h2>{locations.name}   {locations.score}/5</h2>
-                    </Button>
-                  </div>
+                  <li>
+                    <div className="location-container">
+                      <Button variant="dark" size="lg">
+                        <h2>{locations.name}   {locations.score}/5</h2>
+                      </Button>
+                    </div>
+                  </li>
                 )
               })
             }
