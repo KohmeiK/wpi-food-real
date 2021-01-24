@@ -123,7 +123,7 @@ function GoatsHeadMenu() {
       backgroundRepeat: 'no-repeat'
     }}>
       <ul className="TopBar">
-        <li><Image src={logo} roundedCircle /></li>
+        <li><Link to="/loggedin"><Image src={logo} roundedCircle /></Link></li>
         <li>
           <Dropdown>
             

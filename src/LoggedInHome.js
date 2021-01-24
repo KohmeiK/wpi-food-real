@@ -50,7 +50,7 @@ function LoggedInHome() {
       backgroundRepeat: 'no-repeat'
     }}>
       <ul className="TopBar">
-        <li><Image src={logo} roundedCircle /></li>
+        <li><Link to="/"><Image src={logo} roundedCircle /></Link></li>
         <li>
           <Dropdown>
             <Dropdown.Toggle variant="secondary" id="dropdown-basic">
