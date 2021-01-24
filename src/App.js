@@ -1,16 +1,29 @@
 import logo from "./Images/WPI_logo_name_small.png";
 import background from "./Images/FreshmanSkyscraper.png"
 import './App.css';
-import React from "react";
+import React, {useState,useEffect} from "react";
 import firebase from "firebase";
 import Image from 'react-bootstrap/Image'
 import Button from 'react-bootstrap/Button'
 
 function App() {
   const firebaseApp = firebase.apps[0];
-  //
-  // var db = firebase.firestore();
-  //
+  
+  var db = firebase.firestore();
+  
+  const [locations,setLocation]=useState([])
+
+  const fetchLocation=async()=>{
+    const response=db.collection('locations');
+    const data=await response.get();
+    data.docs.forEach(item=>{
+     setLocation([...locations,item.data()])
+    })
+  }
+
+  useEffect(() => {
+    fetchLocation();
+  }, [])
 
   function function123(){
     console.log("Hello World!")
@@ -47,21 +60,17 @@ function App() {
             <li>
               <h1 style={{color:"white"}}>Today's Ratings</h1>
             </li>
-            <li>
-              <Button variant="dark" size="lg">
-                <h2>Goats Head</h2>
-              </Button>{' '}
-            </li>
-            <li>
-              <Button variant="dark" size="lg">
-                <h2>Morgan</h2>
-              </Button>{' '}
-            </li>
-            <li>
-              <Button variant="dark" size="lg">
-                <h2>Foise</h2>
-              </Button>{' '}
-            </li>
+            {
+              locations && locations.map(locations=>{
+                return(
+                  <div className="location-container" key={locations}>
+                    <Button variant="dark" size="lg">
+                      <h2>{locations.name}   {locations.score}/5</h2>
+                    </Button>
+                  </div>
+                )
+              })
+            }
           </ul>
         </li>
         <li>
