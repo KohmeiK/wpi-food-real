@@ -1,18 +1,40 @@
 import logo from "./Images/WPI_logo_name_small.png";
 import background from "./Images/FreshmanSkyscraper.png"
 import './App.css';
-import React from "react";
+import React, {useState,useEffect} from "react";
 import firebase from "firebase";
 import Image from 'react-bootstrap/Image'
 import Button from 'react-bootstrap/Button'
 import Dropdown from 'react-bootstrap/Dropdown'
-import Jumbotron from 'react-bootstrap/Jumbotron'
+
 
 function App() {
   const firebaseApp = firebase.apps[0];
   //
-  // var db = firebase.firestore();
+  var db = firebase.firestore();
   //
+  const [locations,setLocations]=useState([])
+
+  const fetchLocation=async()=>{
+    const locations = []
+    db.collection('locations').get()
+        .then(snapshot => {
+          snapshot.docs.forEach(location => {
+            console.log(location.id, " => ", location.data());
+
+            let currentID = location.id
+            let appObj = { ...location.data(), ['id']: currentID }
+            locations.push(appObj)
+
+            //locations.push(location.data())
+          })
+          setLocations(locations)
+        })
+  }
+
+  useEffect(() => {
+    fetchLocation();
+  }, [])
 
   function function123(){
     console.log("Hello World!")
@@ -52,23 +74,21 @@ function App() {
         <li>
           <ul className="Locations">
             <li>
-              <h1 style={{color:"white"}}>Locations</h1>
+            <h1 style={{color:"white"}}>Today's Ratings</h1>
             </li>
-            <li>
-              <Button variant="dark" size="lg">
-                <h2>Goats Head</h2>
-              </Button>{' '}
-            </li>
-            <li>
-              <Button variant="dark" size="lg">
-                <h2>Morgan</h2>
-              </Button>{' '}
-            </li>
-            <li>
-              <Button variant="dark" size="lg">
-                <h2>Foise</h2>
-              </Button>{' '}
-            </li>
+            {
+              locations && locations.map(locations=>{
+                return(
+                  <li>
+                    <div className="location-container">
+                      <Button variant="dark" size="lg">
+                        <h2>{locations.name}   {locations.score}/5</h2>
+                      </Button>
+                    </div>
+                  </li>
+                )
+              })
+            }
           </ul>
         </li>
         <li>
