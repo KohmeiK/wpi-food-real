@@ -36,7 +36,7 @@ function GoatsHeadMenu() {
           console.log(food.id, " => ", food.data());
 
           let currentID = food.id
-          let appObj = { ...food.data(), ['id:']: currentID }
+          let appObj = { ...food.data(), ['id']: currentID }
 
           foods.push(appObj)
           //console.log(foods);
@@ -148,13 +148,15 @@ function GoatsHeadMenu() {
               <h1 style={{color:"white"}}>{loading ? 'loading' : location.name} Menu</h1>
             </li>
             {
-              foods && foods.map(foods=>{
+              foods && foods.map(food=>{
                 return(
                   <li>
                     <div className="location-container">
+                    <Link to={`/food/${food.id}`}>
                       <Button variant="dark" size="sm">
-                        <h2>{foods.name}</h2>
+                        <h2>{food.name}</h2>
                       </Button>
+                    </Link>
                     </div>
                   </li>
                 )
@@ -170,11 +172,13 @@ function GoatsHeadMenu() {
               </Dropdown.Toggle>
               <Dropdown.Menu as={CustomMenu}>
                 {
-                  foods && foods.map(foods=>{
+                  foods && foods.map(food=>{
                     return(
-                      <Dropdown.Item>
-                            {foods.name}
-                      </Dropdown.Item>
+                      <Link to={`/food/${food.id}`}>
+                        <Dropdown.Item>
+                              {food.name}
+                        </Dropdown.Item>
+                      </Link>
                     )
                   })
                 }

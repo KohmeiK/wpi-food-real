@@ -108,12 +108,10 @@ function SignInHome() {
                 return(
                   <li>
                     <div className="suggestion-container">
-                      <Link to="/loggedin">
-                        <Button variant="dark" size="lg">
+                      <Button variant="dark" size="lg">
                         <h6>{location}</h6>
                         <h2>{topFood}</h2>
-                        </Button>
-                      </Link>
+                      </Button>
                     </div>
                   </li>
                 )

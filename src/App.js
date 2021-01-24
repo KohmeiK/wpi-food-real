@@ -15,7 +15,7 @@ import {
 import GoatsHeadMenu from "./GoatsHeadMenu"
 import LoggedInHome from "./LoggedInHome"
 import SignInHome from "./SignInHome"
-// import GoatsHeadMenu from "./GoatsHeadMenu"
+import FoodRating from "./FoodRating"
 
 
 function App() {
@@ -29,7 +29,8 @@ function App() {
           <Route path="/daka">
             <GoatsHeadMenu />
           </Route>
-          <Route path="/:id" children={<GoatsHeadMenu />}/>
+          <Route path="/location/:id" children={<GoatsHeadMenu />}/>
+          <Route path="/food/:id" children={<FoodRating />}/>
           <Route path="/">
             <SignInHome />
           </Route>

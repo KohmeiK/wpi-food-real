@@ -84,7 +84,7 @@ function LoggedInHome() {
                 return(
                   <li>
                     <div className="location-container">
-                      <Link to={`/${location.id}`}>
+                      <Link to={`/location/${location.id}`}>
                         <Button variant="dark" size="lg">
                           <h2>{location.name}   {location.score}/5</h2>
                         </Button>
