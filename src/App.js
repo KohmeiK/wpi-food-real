@@ -15,12 +15,19 @@ function App() {
   }
 
   function getLocations(time) {
+      var locations = []
         db.collection("locations").where("time", "==", time)
             .get()
             .then(function(querySnapshot) {
                 querySnapshot.forEach(function(doc) {
+                locations.push({
+                    key:   doc.id,
+                    value: doc.data()
+                });
                 console.log(doc.id, " => ", doc.data() )
             })
+        }).then(function() {
+            return locations
         }).catch(function(error) {
           console.log("Error getting locations:", error);
       })
