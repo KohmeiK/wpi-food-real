@@ -89,23 +89,20 @@ function App() {
             <li>
               <h1 style={{color:"white"}}>Hot Items</h1>
             </li>
-            <li>
-              <Button variant="dark" size="lg">
-                <h6>Goat's Head</h6>
-                <h2>Cheese Borgor</h2>
-              </Button>{' '}
-            </li>
-            <li>
-              <Button variant="dark" size="lg">
-                <h6>Morgan</h6>
-                <h2>Pizza</h2>
-              </Button>{' '}
-            </li>
-            <li>
-              <Button variant="light" size="lg">
-                <h2>GET FREE SHIT</h2>
-              </Button>{' '}
-            </li>
+            {
+              locations && locations.map(locations=>{
+                return(
+                  <li>
+                    <div className="suggestion-container">
+                      <Button variant="dark" size="lg">
+                      <h6>{locations.name}</h6>
+                      <h2>{locations.topFood}</h2>
+                      </Button>
+                    </div>
+                  </li>
+                )
+              })
+            }
           </ul>
         </li>
       </ul>
