@@ -6,7 +6,8 @@ import firebase from "firebase";
 import Image from 'react-bootstrap/Image'
 import Button from 'react-bootstrap/Button'
 import Dropdown from 'react-bootstrap/Dropdown'
-
+import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup'
+import Accordion from 'react-bootstrap/Accordion'
 import ReactStars from "react-rating-stars-component";
 
 function App() {
@@ -16,6 +17,15 @@ function App() {
   
   const [food,setFood]=useState()
   const [loading, setLoading] = useState(true)
+
+  var temp = 0;
+
+  function storeDB(){
+    const data = {
+      value: temp,
+    }
+    const res = db.collection('foods').doc('y1Q1mD09L8CAa79tzZPI').collection('ratings').add;
+  }
 
   const fetchFood = () => {
    
@@ -49,7 +59,7 @@ function App() {
     color: "black",
     activeColor: "red",
     onChange: newValue => {
-      console.log(`Example 3: new value is ${newValue}`);
+      temp = newValue;
     }
   };
 
@@ -84,7 +94,7 @@ function App() {
               <h1 style={{color:"white"}}>{loading ? 'loading' : food.score}/5 (average rating)</h1>
               <ReactStars {...thirdExample} />
               <li>
-              <Button variant="dark">
+              <Button variant="dark" onClick={storeDB()}>
                 Submit
               </Button>{' '}
               </li>
