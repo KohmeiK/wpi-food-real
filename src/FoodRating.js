@@ -110,7 +110,8 @@ function FoodRating() {
         backgroundImage: "url(" + background + ")",
         backgroundPosition: 'center',
         backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat'
+        backgroundRepeat: 'no-repeat',
+        height: "100vh"
         }}>
         <ul className="TopBar">
             <li><Link to="/loggedin"><Image src={logo} roundedCircle /></Link></li>
